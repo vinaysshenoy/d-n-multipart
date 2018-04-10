@@ -1,0 +1,34 @@
+buildscript {
+  ext.kotlin_version = '1.2.31'
+  ext.dropwizard_version = '1.3.1'
+
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+  }
+}
+
+group 'com.vinaysshenoy'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'kotlin'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+  compile "io.dropwizard:dropwizard-core:$dropwizard_version"
+  compile "io.dropwizard:dropwizard-client:$dropwizard_version"
+  compile "io.dropwizard:dropwizard-forms:$dropwizard_version"
+}
+
+compileKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+  kotlinOptions.jvmTarget = "1.8"
+}
