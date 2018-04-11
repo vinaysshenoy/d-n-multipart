@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const app = express();
 
 app.get('/', (req, res) => {
@@ -29,6 +30,13 @@ app.get('/', (req, res) => {
   res.write(`Content-Type: application/json; charset=utf-8\n`);
   res.write(`Content-Length: ${Buffer.byteLength(data2, 'utf8')}\n\n`);
   res.write(data2, 'utf8');
+
+  const file = fs.readFileSync('image.jpg');
+  res.write(`\r\n--${boundary}\n`)
+  res.write(`Content-Disposition: attachment; name="image"; filename="image.jpg"\n`);
+  res.write(`Content-Type: image/jpeg\n`);
+  res.write(`Content-Length: ${file.byteLength}\n\n`);
+  res.write(file);
 
   res.write(`\r\n--${boundary}--`);
   res.end('ok');
